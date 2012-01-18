@@ -1,8 +1,15 @@
 ##
-# Worst case: O(n^2)
-
+# where n is number of unique artists in all lists
+#
+# Time complexity:
+# Worst case = O(n^2)
+# Avg case ~ O(n log n)
+#
+# Space Complexity
+# O(n)
 $:.unshift(".")
 require 'artist'
+require 'compat'
 
 require 'digest'
 require 'yaml'
@@ -41,7 +48,7 @@ Artist.instances.each_pair do |artist_name,artist_obj|
   cpy.delete(artist_name)
   cpy.each_pair do |artist_i_name,artist_i|
     next unless artist_obj.shares_n_lists(artist_i,N_LISTS)
-    out << ("%s, %s"%[artist_name,artist_i_name])
+    out << ("%s, %s"%[artist_obj.name,artist_i.name])
     i += 1
   end
 end
@@ -53,6 +60,6 @@ puts out
 STDERR.puts "Total Lines: %d"%lines.length
 STDERR.puts("Actual Iterations: %d"%i)
 STDERR.puts("-- n^2: %d"%(i ** 2))
-STDERR.puts("-- n log n: %f"%(i * Math.log2(i)))
+STDERR.puts("-- n log n: %d"%(i * Math.log2(i))) rescue nil
 STDERR.puts("Done in %fs--"%(t_end - t_start))
 STDERR.puts("md5 checksum: %s"%Digest::MD5.hexdigest(out))
