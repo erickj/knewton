@@ -1,4 +1,4 @@
-To run:
+This is tested to run in ruby 1.8.7 or ruby 1.9.2.  To run do the following:
 
 $ cat data/Artist_lists_small.txt | ruby lines.rb 2> /dev/null
 
