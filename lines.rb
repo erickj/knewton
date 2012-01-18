@@ -5,8 +5,12 @@
 # Worst case = O(n^2)
 # Avg case ~ O(n log n)
 #
+# Worst case time complexity would be where all artists are in greater
+# than N_LISTS lists
+#
 # Space Complexity
 # O(n)
+#
 $:.unshift(".")
 require 'artist'
 require 'compat'
@@ -22,6 +26,9 @@ t_start=Time.now
 #str = File.read(file);
 str = STDIN.read
 
+#
+# split input and build artist objects
+#
 lines = str.split("\n");
 lines.each_index do |i|
   l = lines[i]
@@ -33,6 +40,9 @@ lines.each_index do |i|
 end
 #STDERR.puts(Artist.instances.to_yaml)
 
+#
+# optimization to remove any artists not in N_LISTS
+#
 STDERR.puts "Num artists before prune: %d"%Artist.instances.length
 Artist.instances.reject! do |sym,obj|
   !obj.in_n_lists?(N_LISTS)
@@ -41,6 +51,9 @@ STDERR.puts "Num artists after prune: %d"%Artist.instances.length
 
 #STDERR.puts(Artist.instances.to_yaml)
 
+#
+# collect pairs of artists that share N_LISTS lists
+#
 cpy = Artist.instances.clone
 out = []
 i = 0
