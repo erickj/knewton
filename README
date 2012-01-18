@@ -1,0 +1,5 @@
+To run:
+
+$ cat data/Artist_lists_small.txt | ruby lines.rb 2> /dev/null
+
+If you don't pipe stderr to /dev/null you'll see some debug info print out too
